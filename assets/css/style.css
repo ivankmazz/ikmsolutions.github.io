@@ -1,0 +1,476 @@
+/* =========================================
+   IKM SOLUTIONS | CORE STYLES (LINEAR THEME)
+   ========================================= */
+
+/* --- VARIABLES ROOT --- */
+:root {
+    --bg-color: #02084b;
+    --text-main: #ffffff;
+    --text-muted: #a1a1aa;
+    
+    --accent-blue: #0099ff;
+    --accent-pastel: #8ab4f8;
+    
+    --glass-bg: rgba(15, 15, 15, 0.65);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --glass-hover: rgba(30, 30, 35, 0.6);
+    
+    --font-stack: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* --- RESET & GLOBALS --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: var(--font-stack);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+}
+
+/* --- LOADER --- */
+.loader-container {
+    position: fixed;
+    inset: 0;
+    background-color: var(--bg-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.4s ease;
+}
+
+#logo-loader {
+    width: 200px;
+    height: auto;
+    filter: drop-shadow(0 0 15px rgba(0, 153, 255, 0.2));
+}
+
+.fade-in-hidden {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- NAVEGACIÓN FLOTANTE (GLASSMORPHISM) --- */
+.glass-nav {
+    position: fixed;
+    top: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 900px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 100px;
+    z-index: 1000;
+    padding: 12px 24px;
+}
+
+.nav-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-logo {
+    height: 28px;
+    width: auto;
+    display: block;
+}
+
+.nav-links {
+    display: flex;
+    gap: 32px;
+}
+
+.nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+    color: var(--text-main);
+}
+
+.nav-btn {
+    background: var(--text-main);
+    color: var(--bg-color);
+    text-decoration: none;
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.nav-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+}
+
+/* --- HERO SECTION --- */
+.hero-section {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    padding: 0 20px;
+}
+
+/* El resplandor de fondo */
+.glow-orb {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(0, 153, 255, 0.15) 0%, rgba(0,0,0,0) 60%);
+    z-index: -1;
+    pointer-events: none;
+}
+
+.hero-content {
+    max-width: 800px;
+    z-index: 1;
+}
+
+/* Contenedor para evitar saltos bruscos de altura cuando el texto es largo */
+.carousel-container {
+    min-height: 180px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+}
+
+/* Texto del carrusel con degradado animado */
+.gradient-text {
+    font-size: 4.5rem; /* Ligeramente más pequeño para que entren frases largas */
+    line-height: 1.1;
+    font-weight: 800;
+    letter-spacing: -2px;
+    margin: 0;
+    
+    /* Degradado con tonos pasteles (blanco, azul pastel, lila, menta) */
+    background: linear-gradient(90deg, #ffffff, #8ab4f8, #8e86ff, #8aebf8, #ffffff);
+    background-size: 300% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    
+    /* Animación fluida e infinita de los colores */
+    animation: pastelFlow 10s linear infinite;
+    
+    /* Transición para el efecto de aparición/desaparición (JS) */
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Estado invisible para la transición del carrusel */
+.fade-out {
+    opacity: 0;
+    transform: translateY(-10px);
+}
+
+/* Animación del fondo del degradado */
+@keyframes pastelFlow {
+    0% { background-position: 0% center; }
+    100% { background-position: 300% center; }
+}
+
+/* Ajuste responsive para móviles */
+@media (max-width: 768px) {
+    .gradient-text { font-size: 3rem; }
+    .carousel-container { min-height: 150px; }
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    max-width: 650px;
+    margin: 0 auto 40px auto;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+}
+
+.btn-primary {
+    background: var(--accent-blue);
+    color: var(--text-main);
+    padding: 14px 28px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    box-shadow: 0 0 25px rgba(0, 153, 255, 0.3);
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    box-shadow: 0 0 35px rgba(0, 153, 255, 0.5);
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--text-main);
+    padding: 14px 28px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    border: 1px solid var(--glass-border);
+    transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* --- GRID DE SERVICIOS (EMBUDO) --- */
+.services-section {
+    padding: 100px 20px 120px 20px;
+    position: relative;
+    z-index: 2;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.linear-card {
+    background: rgba(20, 20, 25, 0.4);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 32px;
+    text-decoration: none;
+    color: var(--text-main);
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+}
+
+.linear-card:hover {
+    border-color: rgba(138, 180, 248, 0.3);
+    background: var(--glass-hover);
+    transform: translateY(-5px);
+}
+
+.card-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    margin-bottom: 24px;
+}
+
+.card-icon svg {
+    color: var(--text-main);
+}
+
+.blue-glow { box-shadow: 0 0 20px rgba(0, 153, 255, 0.15); }
+.pastel-glow { box-shadow: 0 0 20px rgba(138, 180, 248, 0.15); }
+.white-glow { box-shadow: 0 0 20px rgba(255, 255, 255, 0.1); }
+
+.linear-card h3 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    letter-spacing: -0.5px;
+}
+
+.linear-card p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* --- RESPONSIVE BASICO --- */
+@media (max-width: 768px) {
+    .gradient-text { font-size: 3.5rem; }
+    .nav-links { display: none; /* En el futuro haremos el menú hamburguesa */ }
+    .glass-nav { justify-content: space-between; }
+    .hero-buttons { flex-direction: column; }
+}
+
+/* =========================================
+   SECCIÓN PERFIL (QUIEN SOY)
+   ========================================= */
+
+/* --- Contenedor Bio y Foto --- */
+.profile-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 60px;
+    padding: 0 20px;
+    max-width: 1100px;
+    margin: 0 auto 60px auto;
+    align-items: flex-start;
+}
+
+.profile-img {
+    flex: 1 1 300px;
+    max-width: 400px;
+    width: 100%;
+    border-radius: 16px;
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    object-fit: cover;
+}
+
+.profile-text {
+    flex: 2 1 400px;
+}
+
+/* --- Barras de Skills --- */
+.skill-box {
+    margin-bottom: 24px;
+}
+
+.skill-name {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--glass-border);
+}
+
+.progress {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent-blue), var(--accent-pastel));
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(138, 180, 248, 0.4);
+    transition: width 1s ease-in-out;
+}
+
+/* --- Historial Operativo (Timeline Glassmorphism) --- */
+.experience-section {
+    padding: 0 20px;
+    max-width: 1000px;
+    margin: 0 auto 100px auto;
+}
+
+.timeline-container {
+    position: relative;
+    padding-left: 40px;
+    border-left: 2px solid var(--glass-border);
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 40px;
+}
+
+.timeline-item:last-child {
+    margin-bottom: 0;
+}
+
+.timeline-dot {
+    position: absolute;
+    left: -47px; /* Centra el punto exacto sobre la línea */
+    top: 0;
+    width: 14px;
+    height: 14px;
+    background-color: var(--bg-color);
+    border: 2px solid var(--accent-pastel);
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(138, 180, 248, 0.5);
+}
+
+.timeline-content {
+    background: rgba(20, 20, 25, 0.4);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 30px;
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+}
+
+.timeline-content:hover {
+    transform: translateX(10px);
+    border-color: rgba(138, 180, 248, 0.3);
+    background: var(--glass-hover);
+}
+
+.timeline-year {
+    display: inline-block;
+    color: var(--accent-pastel);
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+}
+
+.timeline-content h3 {
+    font-size: 1.4rem;
+    margin-bottom: 12px;
+    color: var(--text-main);
+    font-weight: 600;
+}
+
+.company {
+    color: var(--text-muted);
+    font-weight: 400;
+}
+
+.timeline-content p {
+    color: var(--text-muted);
+    line-height: 1.6;
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+#logo-loader {
+    width: 600px; /* Tamaño principal en monitores */
+    max-width: 90%; /* Evita que se corte en pantallas pequeñas */
+    height: auto;
+    filter: drop-shadow(0 0 25px rgba(0, 153, 255, 0.3)); /* Resplandor sutil */
+}

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IKM Solutions | Hardware & Software</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+    <!-- LOADER -->
+    <div id="loader" class="loader-container">
+        <img src="assets/img/LogoIKM.png" id="logo-loader" alt="Cargando IKM...">
+    </div>
+
+    <!-- NAVEGACIÓN FLOTANTE (Glassmorphism) -->
+    <nav class="glass-nav">
+        <div class="nav-content">
+            <a href="index.html" class="nav-brand">
+                <img src="assets/img/LogoIKM.png" alt="IKM" class="nav-logo">
+            </a>
+            <div class="nav-links">
+                <a href="hardware.html">Hardware</a>
+                <a href="soporte.html">Servicio IT</a>
+                <a href="software.html">Software</a>
+                <a href="perfil.html">Perfil</a>
+            </div>
+            <a href="https://wa.me/5491125727495" target="_blank" class="nav-btn">Consultar</a>
+        </div>
+    </nav>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main id="contenido-web" class="fade-in-hidden">
+        
+        <!-- SECCIÓN HERO -->
+        <!-- SECCIÓN HERO -->
+        <header class="hero-section">
+            <div class="glow-orb"></div>
+            
+            <div class="hero-content">
+                <!-- Calesita dinámica -->
+                <div class="carousel-container">
+                    <h1 class="gradient-text dynamic-carousel" id="carousel-text">Soluciones a medida en hardware y software</h1>
+                </div>
+                <p class="hero-subtitle">
+                    Servicio tecnico para usuarios y empresas.
+                </p>
+                <!-- Botones eliminados según lo solicitado -->
+            </div>
+        </header>
+
+        <!-- EMBUDO DE SERVICIOS (3 Pilares) -->
+        <section id="ecosistema" class="services-section">
+            <div class="services-grid">
+                
+                <!-- Tarjeta 1: Hardware -->
+                <a href="hardware.html" class="linear-card">
+                    <div class="card-icon blue-glow">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                    </div>
+                    <h3>Hardware & Reparación</h3>
+                    <p>Mantenimiento profundo, armado de equipos, upgrades, reacondicionamiento móvil y micro-soldadura. Especialistas en PC, Apple y Drones DJI.</p>
+                </a>
+
+                <!-- Tarjeta 2: Servicio IT -->
+                <a href="soporte.html" class="linear-card">
+                    <div class="card-icon pastel-glow">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                    </div>
+                    <h3>Servicio IT & Consultoría</h3>
+                    <p>Resolución de infraestructuras IT, mantenimiento preventivo de redes empresariales y asesoramiento tecnológico estratégico.</p>
+                </a>
+
+                <!-- Tarjeta 3: Software & 3D -->
+                <a href="software.html" class="linear-card">
+                    <div class="card-icon white-glow">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                    </div>
+                    <h3>Desarrollo & Diseño 3D</h3>
+                    <p>Programación Full Stack para aplicaciones web de alto rendimiento y renderizado arquitectónico avanzado (SketchUp, Lumion, VRay).</p>
+                </a>
+
+            </div>
+        </section>
+        
+    </main>
+
+    <!-- Lógica de inicialización -->
+<!-- Lógica de inicialización -->
+    <script>
+        window.addEventListener("load", () => {
+            const loader = document.getElementById("loader");
+            const contenido = document.getElementById("contenido-web");
+            
+            // El primer número (4000) son los 4 segundos que el logo se queda fijo
+            setTimeout(() => {
+                loader.style.opacity = "0";
+                
+                // El segundo número (400) es lo que tarda en desvanecerse (fade out)
+                setTimeout(() => {
+                    loader.style.display = "none";
+                    contenido.style.display = "block";
+                    void contenido.offsetWidth; 
+                    contenido.classList.add("fade-in-visible");
+                }, 200); 
+            }, 2000); 
+        });
+    </script>
+
+    <!-- Lógica del Carrusel de Texto -->
+    <script>
+        const phrases = [
+            "Soluciones a medida en hardware y software",
+            "Reparación y reacondicionamiento de celulares",
+            "Mantenimiento y armado de pcs y laptops",
+            "Consultoría técnica asesorada y facilitada",
+            "Programación y diseño arquitectónico 3D"
+        ];
+        
+        let currentPhrase = 0;
+        const carouselText = document.getElementById("carousel-text");
+
+        // Iniciar el carrusel una vez que la página carga
+        window.addEventListener("load", () => {
+            setInterval(() => {
+                // 1. Iniciar desvanecimiento
+                carouselText.classList.add("fade-out");
+                
+                // 2. Esperar a que termine la transición (500ms) para cambiar el texto
+                setTimeout(() => {
+                    currentPhrase = (currentPhrase + 1) % phrases.length;
+                    carouselText.textContent = phrases[currentPhrase];
+                    
+                    // 3. Volver a mostrar el texto
+                    carouselText.classList.remove("fade-out");
+                }, 500);
+                
+            }, 4000); // Cambia de frase cada 4 segundos
+        });
+    </script>
+</body>
+</html>
